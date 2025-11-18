@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block base %}
+
+<div class="w-full max-w-[1300px] mx-auto my-10 px-4">
+
+    <!-- MAIN PAGE HEADING -->
+    <h1 class="text-4xl font-extrabold text-center mb-12 text-[#0A2025] dark:text-white">
+        My Courses
+    </h1>
+
+    <!-- Grid layout for cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+        {% for order in orders %}
+            {% for c in order.course_object.all %}
+
+            <!-- COURSE CARD -->
+            <div class="bg-white dark:bg-[#0A2025] shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition duration-300">
+
+                <!-- Image -->
+                <img src="{{ c.picture.url }}"
+                     alt="{{ c.title }}"
+                     class="w-full h-48 object-cover">
+
+                <!-- Content -->
+                <div class="p-6">
+
+                    <!-- Title -->
+                    <h3 class="text-2xl font-bold text-[#0A2025] dark:text-white mb-3">
+                        {{ c.title }}
+                    </h3>
+
+                    <!-- Categories -->
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-5">
+                        {% for cat in c.Category_obj.all %}
+                            <span class="font-semibold">{{ cat.name }}</span>
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+
+                    <!-- Button -->
+                    <a href="{% url 'lesson_details' c.id %}"
+                       class="inline-block w-full text-center bg-[#3e9d26] text-white py-2.5 rounded-lg font-semibold hover:bg-green-700 transition">
+                        View Lessons
+                    </a>
+
+                </div>
+            </div>
+
+            {% endfor %}
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock base %}

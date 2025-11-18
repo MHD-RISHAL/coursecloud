@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block base %}
+
+<!-- Hero Banner -->
+<div class="relative h-96 overflow-hidden">
+    <img src="https://www.videomeet.in/new-images/edu-banner.jpg"
+         alt="Education Banner"
+         class="w-full h-full object-cover object-center"
+         loading="lazy">
+    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+        <div class="text-center text-white px-4 animate-fadeInUp">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                Transform Your Future with Online Learning
+            </h1>
+            <p class="text-xl mb-6">
+                Access world-class education from anywhere. Start your journey with our expert-led courses.
+            </p>
+            <a href="#courses" class="bg-primary hover:bg-red-500 text-white px-8 py-3 rounded-full font-medium transition-colors duration-300">
+                Browse Courses
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Courses Section -->
+<div class="featured-section px-5 py-16 text-center" id="courses">
+    <div class="section-header flex justify-between items-center mb-10 animate-fadeInUp" style="animation-delay: 0.5s;">
+        <h2 class="text-3xl font-bold">FEATURED COURSES</h2>
+    </div>
+
+    <!-- Course Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {% for i in courses %}
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 animate-fadeInUp" style="animation-delay: 0.9s;">
+            
+            <div class="relative overflow-hidden group">
+
+                <img src="{{ i.picture.url }}"
+                     alt="{{ i.title }}"
+                     class="w-full h-64 object-cover"
+                     loading="lazy">
+
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 pointer-events-none"></div>
+
+                <!-- Check Purchased or Not -->
+                {% if i.id in purchased_course %}
+                    <!-- Explore Button -->
+                    <a href="{% url 'lesson_details' i.id %}"
+                       class="absolute z-10 bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-green-700">
+                        Explore
+                    </a>
+                {% else %}
+                    <!-- Enroll Button -->
+                    <a href="{% url 'course-details' i.id %}"
+                       class="absolute z-10 bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-500">
+                        Enroll Now
+                    </a>
+                {% endif %}
+
+            </div>
+
+            <!-- Course Info -->
+            <div class="p-4">
+                <h3 class="font-semibold text-lg">{{ i.title }}</h3>
+
+                <div class="mt-1">
+                    {% for j in i.Category_obj.all %}
+                    <span class="text-amber-600 border-e-2 border-e-black px-3">{{ j }}</span>
+                    {% endfor %}
+                </div>
+
+                {% if i.is_free %}
+                    <p class="text-green-500 font-bold text-xl mt-2">FREE</p>
+                {% else %}
+                    <p class="text-primary font-bold text-xl mt-2">RS: {{ i.price }}</p>
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock base %}

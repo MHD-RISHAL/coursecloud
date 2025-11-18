@@ -1,0 +1,23 @@
+Django Admin Interface:
+========================
+
+->Django ModelAdmin class :
+---------------------------
+-its a configuration class that tells django admin interface to how to
+and mange a model in adimin panel
+-simply ,for  customizing model classes in admin panel for
+ specifying how to show and bhave in admin panel
+
+ exclude:- used for specifying which field to not show in Admin
+ -save_model():- its a hook(override point) that allow you to
+ customize what happens when an object is saved from the admin
+panel
+     -request: current HTTP request object
+     -obj: The actual instance of the model being created or edited.
+     -form:The ModelForm instance used to edit the object in the admin panel
+     -change:A boolean indicating whether this is a change (True) or a new object (False).
+   
+
+
+
+
