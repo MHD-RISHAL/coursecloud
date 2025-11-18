@@ -40,14 +40,13 @@
         <tfoot>
           <tr class="border-t border-gray-400">
             <td class="px-2 py-2" colspan="3">
-              <button class="px-8 cursor-pointer py-3.5 bg-[#f2f2f2] rounded-[43px] text-[#4c4c4c] text-sm font-semibold leading-[16px]">
-                Return to shop
-              </button>
+              <a href="{% url 'home' %}">
+                <button class="px-8 cursor-pointer py-3.5 bg-[#f2f2f2] rounded-[43px] text-[#4c4c4c] text-sm font-semibold leading-[16px]">
+                  Return to home
+                </button>
+              </a>
             </td>
             <td class="px-2 py-2" colspan="2">
-              <button class="px-8 py-3.5 cursor-pointer bg-[#f2f2f2] rounded-[43px] text-[#4c4c4c] text-sm font-semibold leading-[16px]">
-                Update Cart
-              </button>
             </td>
           </tr>
         </tfoot>
